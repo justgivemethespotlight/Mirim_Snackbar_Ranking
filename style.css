@@ -1,380 +1,165 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; }
 
-  #app {
-    font-family: 'Noto Sans KR';
-    color: var(--color-text-primary);
-    min-height: 600px;
-    position: relative;
-  }
+/* ── 랜딩 ── */
+#landing {
+  background: #1a1a2e; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 3rem 2rem;
+  position: relative; overflow: hidden;
+}
+#landing::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 60%, #e8612018 0%, transparent 70%);
+  pointer-events: none;
+}
+.landing-badge {
+  display: inline-block; background: #e86120; color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  padding: 4px 14px; border-radius: 20px; margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.landing-title {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 38px; font-weight: 700;
+  color: #fff; line-height: 1.3; margin-bottom: 0.75rem;
+}
+.landing-title span { color: #e86120; }
+.landing-sub { font-size: 14px; color: #ffffff70; margin-bottom: 2.5rem; line-height: 1.8; }
+.enter-btn {
+  background: #e86120; color: #fff; border: none;
+  padding: 14px 40px; border-radius: 40px;
+  font-size: 16px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+  position: relative;
+  z-index: 3;
+}
+.enter-btn:hover { background: #d05518; transform: translateY(-2px); }
+.enter-btn:active { transform: scale(0.97); }
 
-  /* ── LANDING ── */
-  #landing {
-    background: #1a1a2e;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 3rem 2rem;
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--border-radius-lg);
-  }
+/* ── 메인 ── */
+#main-page { display: none; background: #faf9f6; min-height: 100vh; }
 
-  #landing::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 70% 50% at 50% 60%, #e8612020 0%, transparent 70%);
-    pointer-events: none;
-  }
+.top-nav {
+  background: #1a1a2e; padding: 16px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Noto Sans KR', sans-serif; color: #fff;
+  font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+}
+.nav-logo .dot { color: #e86120; }
+.nav-back {
+  background: none; border: 1px solid #ffffff30; color: #ffffff90;
+  padding: 6px 16px; border-radius: 20px;
+  font-size: 12px; font-family: 'Noto Sans KR', sans-serif;
+  cursor: pointer; transition: all 0.2s;
+}
+.nav-back:hover { border-color: #e86120; color: #e86120; }
 
-  .landing-badge {
-    display: inline-block;
-    background: #e86120;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 4px 14px;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-  }
+.page-content { padding: 2rem 1.75rem; max-width: 720px; margin: 0 auto; }
 
-  .landing-title {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 38px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.25;
-    margin-bottom: 0.75rem;
-  }
+.section-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #e86120; margin-bottom: 6px;
+}
+.section-title {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 22px;
+  font-weight: 700; color: #1a1a2e; margin-bottom: 4px;
+}
+.section-desc { font-size: 13px; color: #888; margin-bottom: 1.5rem; line-height: 1.6; }
 
-  .landing-title span { color: #e86120; }
+/* ── 챔피언 배너 ── */
+.champion-banner {
+  background: #1a1a2e; border-radius: 12px;
+  padding: 1.4rem 1.5rem; display: flex; align-items: center; gap: 1.1rem;
+  margin-bottom: 2rem; position: relative; overflow: hidden;
+}
+.champion-banner::after {
+  content: '🏆'; position: absolute; right: 20px;
+  font-size: 56px; opacity: 0.12; pointer-events: none;
+}
+.champion-medal {
+  width: 52px; height: 52px; background: #e86120; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.champion-text .label {
+  font-size: 10px; color: #ffffff55; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;
+}
+.champion-text .name {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 20px;
+  font-weight: 700; color: #fff; margin-bottom: 2px;
+}
+.champion-text .sub { font-size: 12px; color: #ffffff55; }
+.champion-rank-badge { margin-left: auto; padding-right: 46px; }
+.champion-rank-badge .rank-big { font-size: 36px; line-height: 1; }
+.champion-rank-badge .rank-label { font-size: 11px; color: #ffffff45; margin-top: 2px; text-align: right; }
 
-  .landing-sub {
-    font-size: 14px;
-    color: #ffffff80;
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-  }
+.month-badge {
+  display: inline-block; background: #fff0e8; color: #e86120;
+  font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 12px;
+  margin-bottom: 1.5rem; border: 1px solid #f5c9aa;
+}
 
-  .enter-btn {
-    background: #e86120;
-    color: #fff;
-    border: none;
-    padding: 14px 40px;
-    border-radius: 40px;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: 'Noto Sans KR';
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .enter-btn:hover { background: #d05518; transform: translateY(-2px); }
-  .enter-btn:active { transform: scale(0.97); }
+/* ── 분야별 1위 카드 ── */
+.cat-winner-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 2rem; }
+.cat-winner-card {
+  background: #fff; border: 0.5px solid #e0ddd6; border-radius: 8px;
+  padding: 12px 10px; text-align: center; cursor: pointer; transition: all 0.15s;
+}
+.cat-winner-card:hover { border-color: #e86120; transform: translateY(-2px); }
+.cat-winner-card.champ { border: 2px solid #e86120; }
+.cat-winner-card .w-emoji { font-size: 22px; margin-bottom: 4px; }
+.cat-winner-card .w-cat { font-size: 10px; color: #aaa; margin-bottom: 2px; }
+.cat-winner-card .w-name { font-size: 12px; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.cat-winner-card .w-rank { font-size: 11px; color: #e86120; font-weight: 700; margin-top: 3px; }
+.cat-winner-card .champ-tag {
+  font-size: 9px; background: #e86120; color: #fff;
+  padding: 1px 6px; border-radius: 8px; display: inline-block; margin-top: 3px;
+}
 
-  .deco-circles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  .deco-circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid #ffffff10;
-  }
+.divider { height: 1px; background: #e8e5de; margin: 1.75rem 0; }
 
-  /* ── MAIN PAGE ── */
-  #main-page {
-    display: none;
-    background: #faf9f6;
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    min-height: 600px;
-  }
+/* ── 카테고리 탭 ── */
+.cat-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 1.25rem; }
+.cat-tab {
+  padding: 8px 4px; border-radius: 10px; font-size: 12px;
+  font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+  border: 1px solid #e0ddd6; background: #fff; color: #666;
+  transition: all 0.15s; font-weight: 500; text-align: center; line-height: 1.4;
+}
+.cat-tab .tab-emoji { display: block; font-size: 18px; margin-bottom: 2px; }
+.cat-tab.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+.cat-tab:hover:not(.active) { border-color: #e86120; color: #e86120; }
 
-  .top-nav {
-    background: #1a1a2e;
-    padding: 16px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-logo {
-    font-family: 'Noto Serif KR';
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .nav-logo .dot { color: #e86120; }
-
-  .nav-back {
-    background: none;
-    border: 1px solid #ffffff30;
-    color: #ffffff90;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-family: 'Noto Sans KR';
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .nav-back:hover { border-color: #e86120; color: #e86120; }
-
-  .page-content { padding: 2rem 1.75rem; }
-
-  .section-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #e86120;
-    margin-bottom: 6px;
-  }
-
-  .section-title {
-    font-family: 'Noto Serif KR';
-    font-size: 24px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 4px;
-  }
-
-  .section-desc {
-    font-size: 13px;
-    color: #777;
-    margin-bottom: 1.75rem;
-    line-height: 1.6;
-  }
-
-  /* ── CHAMPION SPOTLIGHT ── */
-  .champion-banner {
-    background: #1a1a2e;
-    border-radius: var(--border-radius-lg);
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .champion-banner::after {
-    content: '🏆';
-    position: absolute;
-    right: 20px;
-    font-size: 60px;
-    opacity: 0.15;
-  }
-
-  .champion-medal {
-    width: 56px;
-    height: 56px;
-    background: #e86120;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-  }
-
-  .champion-text .label {
-    font-size: 11px;
-    color: #ffffff60;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-
-  .champion-text .name {
-    font-family: 'Noto Serif KR';
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 2px;
-  }
-
-  .champion-text .sub {
-    font-size: 12px;
-    color: #ffffff60;
-  }
-
-  .champion-score {
-    margin-left: auto;
-    text-align: right;
-    padding-right: 50px;
-  }
-
-  .champion-score .num {
-    font-size: 28px;
-    font-weight: 700;
-    color: #e86120;
-    line-height: 1;
-  }
-
-  .champion-score .unit {
-    font-size: 11px;
-    color: #ffffff50;
-    margin-top: 2px;
-  }
-
-  /* ── CATEGORY TABS ── */
-  .cat-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-  }
-
-  .cat-tab {
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-family: 'Noto Sans KR';
-    cursor: pointer;
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #555;
-    transition: all 0.15s;
-    font-weight: 500;
-  }
-
-  .cat-tab.active {
-    background: #1a1a2e;
-    color: #fff;
-    border-color: #1a1a2e;
-  }
-
-  .cat-tab:hover:not(.active) { border-color: #e86120; color: #e86120; }
-
-  /* ── RANK CARDS ── */
-  .rank-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .rank-card {
-    background: #fff;
-    border: 0.5px solid #e0ddd6;
-    border-radius: var(--border-radius-lg);
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: transform 0.15s;
-  }
-
-  .rank-card:hover { transform: translateX(4px); }
-
-  .rank-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .rank-num.r1 { background: #e86120; color: #fff; }
-  .rank-num.r2 { background: #e0ddd6; color: #555; }
-  .rank-num.r3 { background: #e8e3d5; color: #777; }
-  .rank-num.rn { background: #f4f3f0; color: #aaa; font-size: 12px; }
-
-  .rank-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: #f4f3f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-
-  .rank-info { flex: 1; min-width: 0; }
-
-  .rank-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .rank-tag {
-    font-size: 11px;
-    color: #999;
-  }
-
-  .rank-score {
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .rank-score .score-num {
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a2e;
-  }
-
-  .rank-score .score-label {
-    font-size: 11px;
-    color: #bbb;
-  }
-
-  .rank-bar-wrap {
-    width: 80px;
-    height: 4px;
-    background: #f0ede7;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 4px;
-  }
-
-  .rank-bar { height: 100%; background: #e86120; border-radius: 2px; }
-
-  .empty-note {
-    background: #f4f3f0;
-    border-radius: var(--border-radius-md);
-    padding: 1.5rem;
-    text-align: center;
-    color: #aaa;
-    font-size: 13px;
-    margin-top: 8px;
-    border: 1px dashed #ddd;
-  }
-
-  .month-badge {
-    display: inline-block;
-    background: #fff0e8;
-    color: #e86120;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    border: 1px solid #f5c9aa;
-  }
+/* ── 순위 카드 ── */
+.rank-grid { display: flex; flex-direction: column; gap: 8px; }
+.rank-card {
+  background: #fff; border: 0.5px solid #e0ddd6; border-radius: 12px;
+  padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.15s;
+}
+.rank-card:hover { transform: translateX(4px); }
+.rank-card.top1 { border: 1.5px solid #e86120; background: #fff8f4; }
+.rank-medal { font-size: 28px; flex-shrink: 0; width: 36px; text-align: center; }
+.rank-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+  background: #f0ede7; color: #aaa;
+}
+.rank-icon {
+  width: 40px; height: 40px; border-radius: 10px; background: #f4f3f0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.rank-info { flex: 1; min-width: 0; }
+.rank-name { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-tag { font-size: 11px; color: #aaa; }
+.empty-note {
+  background: #f4f3f0; border-radius: 8px; padding: 2rem;
+  text-align: center; color: #bbb; font-size: 13px;
+  border: 1px dashed #ddd; line-height: 1.8;
+}
