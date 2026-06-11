@@ -1,69 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미림마이스터고 매점</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="Team_Azas.css">
 </head>
 <body>
-<div id="app">
 
   <div id="landing">
-    <svg class="deco-circles" viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="80" cy="80" r="120" fill="none" stroke="#ffffff08" stroke-width="1"/>
-      <circle cx="80" cy="80" r="200" fill="none" stroke="#ffffff05" stroke-width="1"/>
-      <circle cx="600" cy="500" r="150" fill="none" stroke="#ffffff06" stroke-width="1"/>
-      <circle cx="600" cy="500" r="250" fill="none" stroke="#ffffff04" stroke-width="1"/>
-      <circle cx="340" cy="300" r="300" fill="none" stroke="#e8612008" stroke-width="1"/>
+    <svg style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;" viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="80" r="120" fill="none" stroke="#ffffff06" stroke-width="1"/>
+      <circle cx="80" cy="80" r="220" fill="none" stroke="#ffffff04" stroke-width="1"/>
+      <circle cx="600" cy="500" r="160" fill="none" stroke="#ffffff05" stroke-width="1"/>
+      <circle cx="600" cy="500" r="260" fill="none" stroke="#ffffff03" stroke-width="1"/>
     </svg>
     <div class="landing-badge">미림마이스터고등학교</div>
     <h1 class="landing-title">우리 학교 <span>매점</span>의<br>모든 것</h1>
     <p class="landing-sub">매달 업데이트되는 분야별 음식 순위와<br>이달의 최고 메뉴를 만나보세요.</p>
-    <button class="enter-btn" onclick="goMain()">
-      <i class="ti ti-door-enter" aria-hidden="true"></i> 들어가기
-    </button>
+    <button class="enter-btn" onclick="goMain()">들어가기</button>
   </div>
 
   <div id="main-page">
     <nav class="top-nav">
-      <div class="nav-logo">
-        <i class="ti ti-tool-kitchen-2" aria-hidden="true"></i>
-        미림<span class="dot">●</span>매점
-      </div>
+      <div class="nav-logo">미림<span class="dot">●</span>매점</div>
       <button class="nav-back" onclick="goLanding()">← 처음으로</button>
     </nav>
-
     <div class="page-content">
-      <div class="month-badge" id="month-label">2025년 6월 기준</div>
+      <div class="month-badge" id="month-label"></div>
 
       <div class="section-eyebrow">이달의 최고</div>
       <h2 class="section-title">종합 1위 메뉴</h2>
-      <p class="section-desc">모든 분야의 1등 중 가장 높은 점수를 기록한 메뉴입니다.</p>
-
+      <p class="section-desc">모든 분야 1위 중 선정된 이달의 챔피언입니다.</p>
       <div class="champion-banner">
-        <div class="champion-medal">🏆</div>
+        <div class="champion-medal">⚡</div>
         <div class="champion-text">
-          <div class="label">이달의 챔피언</div>
-          <div class="name" id="champ-name">—</div>
-          <div class="sub" id="champ-cat">분야 정보를 추가하면 자동으로 표시됩니다</div>
+          <div class="label">이달의 매점왕</div>
+          <div class="name">포켓몬빵</div>
+          <div class="sub">빵류 1위</div>
         </div>
-        <div class="champion-score">
-          <div class="num" id="champ-score">—</div>
-          <div class="unit">점</div>
+        <div class="champion-rank-badge">
+          <div class="rank-big">👑</div>
+          <div class="rank-label">종합 1위</div>
         </div>
       </div>
 
+      <div class="section-eyebrow">분야별 1위 한눈에 보기</div>
+      <h2 class="section-title">카테고리 대표 메뉴</h2>
+      <p class="section-desc">각 분야 1위 메뉴예요. 클릭하면 해당 분야 전체 순위로 이동해요.</p>
+      <div class="cat-winner-row" id="winner-row"></div>
+
+      <div class="divider"></div>
+
       <div class="section-eyebrow">분야별 순위</div>
       <h2 class="section-title">카테고리 랭킹</h2>
-      <p class="section-desc">분야를 선택해 해당 카테고리의 음식 순위를 확인하세요.</p>
-
+      <p class="section-desc">분야를 선택해 전체 순위를 확인하세요.</p>
       <div class="cat-tabs" id="cat-tabs"></div>
       <div class="rank-grid" id="rank-list"></div>
     </div>
   </div>
-
-</div>
-<script src="script.js"></script>
+  <script src="Team_Azas.js"></script>
 </body>
-</html>
