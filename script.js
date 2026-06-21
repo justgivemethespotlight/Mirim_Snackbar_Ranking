@@ -116,12 +116,7 @@ const CHAMPION = { catId: 'bread', name: '포켓몬빵', emoji: '⚡' };
 
   function renderTabs() {
     const wrap = document.getElementById('cat-tabs');
-    wrap.innerHTML = categories.map(c =>
-      `<button class="cat-tab${c.id === activeCat ? ' active' : ''}" onclick="setTab('${c.id}')">
-        <span class="tab-emoji">${c.emoji}</span>${c.label}
-      </button>`
-    ).join('');
-    // add 전체 tab first, then category tabs
+    if (!wrap) return;
     const allBtn = `<button class="cat-tab${activeCat === 'all' ? ' active' : ''}" onclick="setTab('all')">
       <span class="tab-emoji">🌐</span>전체
     </button>`;
@@ -129,7 +124,7 @@ const CHAMPION = { catId: 'bread', name: '포켓몬빵', emoji: '⚡' };
       `<button class="cat-tab${c.id === activeCat ? ' active' : ''}" onclick="setTab('${c.id}')">
         <span class="tab-emoji">${c.emoji}</span>${c.label}
       </button>`
-   ).join('');
+    ).join('');
     wrap.innerHTML = allBtn + catBtns;
   }
 
@@ -137,32 +132,48 @@ const CHAMPION = { catId: 'bread', name: '포켓몬빵', emoji: '⚡' };
     activeCat = id;
     renderTabs();
     renderRanks();
-    document.getElementById('rank-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const list = document.getElementById('rank-list');
+    if (list) list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function renderRanks() {
-    const cat = categories.find(c => c.id === activeCat);
     const list = document.getElementById('rank-list');
+    if (!list) return;
+
+    if (activeCat === 'all') {
+      const overall = computeOverallList();
+      if (!overall.length) {
+        list.innerHTML = `<div class="empty-note">전체 항목이 없습니다.</div>`;
+        return;
+      }
+      list.innerHTML = overall.map((item, i) => {
+        const medal = MEDALS[i] || null;
+        return `<div class="rank-card${i === 0 ? ' top1' : ''}">
+          ${medal ? `<div class="rank-medal">${medal}</div>` : `<div class="rank-num">${i+1}</div>`}
+          <div class="rank-icon">${item.emoji}</div>
+          <div class="rank-info">
+            <div class="rank-name">${item.name}</div>
+            <div class="rank-tag">${item.cat}</div>
+          </div>
+        </div>`;
+      }).join('');
+      return;
+    }
+
+    const cat = categories.find(c => c.id === activeCat);
     if (!cat) {
-      list.innerHTML = `<div style="background:#f4f3f0;border-radius:8px;padding:2rem;text-align:center;color:#bbb;font-size:13px;border:1px dashed #ddd;">
-        <span style="font-size:28px;display:block;margin-bottom:8px;">⚠️</span>
-        <strong style="color:#999;">카테고리 없음</strong> 선택된 카테고리를 찾을 수 없습니다.
-      </div>`;
+      list.innerHTML = `<div class="empty-note">선택된 카테고리를 찾을 수 없습니다.</div>`;
       return;
     }
     if (!cat.items || cat.items.length === 0) {
-      list.innerHTML = `<div style="background:#f4f3f0;border-radius:8px;padding:2rem;text-align:center;color:#bbb;font-size:13px;border:1px dashed #ddd;">
-        <span style="font-size:28px;display:block;margin-bottom:8px;">🕐</span>
-        <strong style="color:#999;">${cat.label}</strong> 메뉴를 곧 업데이트할 예정이에요!
-      </div>`;
+      list.innerHTML = `<div class="empty-note"><strong>${cat.label}</strong> 메뉴를 곧 업데이트할 예정이에요!</div>`;
       return;
     }
+
     list.innerHTML = cat.items.map((item, i) => {
       const medal = MEDALS[i] || null;
       return `<div class="rank-card${i === 0 ? ' top1' : ''}">
-        ${medal
-          ? `<div class="rank-medal">${medal}</div>`
-          : `<div class="rank-num">${i+1}</div>`}
+        ${medal ? `<div class="rank-medal">${medal}</div>` : `<div class="rank-num">${i+1}</div>`}
         <div class="rank-icon">${item.emoji || cat.emoji}</div>
         <div class="rank-info">
           <div class="rank-name">${item.name}</div>
@@ -176,54 +187,7 @@ const CHAMPION = { catId: 'bread', name: '포켓몬빵', emoji: '⚡' };
   document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#landing .enter-btn');
     if (btn) {
-      btn.type = 'button'; // 명시적 타입 지정
-      if (typeof goMain === 'function') btn.addEventListener('click', goMain);
-    }
-  });
-    if (activeCat === 'all') {
-      const overall = computeOverallList();
-      if (!overall.length) {
-        list.innerHTML = `<div class="empty-note">전체 항목이 없습니다.</div>`;
-        return;
-      }
-      list.innerHTML = overall.map((item, i) => {
-        const medal = MEDALS[i] || null;return `<div class="rank-card${i === 0 ? ' top1' : ''}">
-          ${medal ? `<div class="rank-medal">${medal}</div>` : `<div class="rank-num">${i+1}</div>`}
-          <div class="rank-icon">${item.emoji}</div>
-          <div class="rank-info">
-            <div class="rank-name">${item.name}</div>
-            <div class="rank-tag">${item.cat}</div>
-          </div>
-        </div>`;
-      }).join('');
-      return;
-    }
-    const cat = categories.find(c => c.id === activeCat);
-    if (!cat) {
-      list.innerHTML = `<div class="empty-note">선택된 카테고리를 찾을 수 없습니다.</div>`;
-      return;
-    }
-    if (!cat.items || cat.items.length === 0) {
-      list.innerHTML = `<div class="empty-note"><strong>${cat.label}</strong> 메뉴를 곧 업데이트할 예정이에요!</div>`;
-      return;
-    }
-    list.innerHTML = cat.items.map((item, i) => {
-      const medal = MEDALS[i] || null;
-      return `<div class="rank-card${i === 0 ? ' top1' : ''}">
-        ${medal ? `<div class="rank-medal">${medal}</div>` : `<div class="rank-num">${i+1}</div>`}
-        <div class="rank-icon">${item.emoji || cat.emoji}</div>
-        <div class="rank-info">
-         <div class="rank-name">${item.name}</div>
-          <div class="rank-tag">${item.tag || ''}</div>
-        </div>
-      </div>`;
-    }).join('');
-  
-  // attach safe click handler in case inline onclick doesn't fire
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.querySelector('#landing .enter-btn');
-    if (btn) {
-      btn.type = 'button'; // 명시적 타입 지정
+      btn.type = 'button';
       if (typeof goMain === 'function') btn.addEventListener('click', goMain);
     }
   });
